@@ -116,5 +116,13 @@ public class TicketServiceImplTest {
         verify(mockPaymentService).makePayment(123L, 50);
         verify(mockReservationService).reserveSeat(123L, 3);
     }
+    
+    @Test(expected = InvalidPurchaseException.class)
+    public void testPurchaseTicketsWithInvalidAccountId() throws InvalidPurchaseException {
+    	TicketTypeRequest adultTicketType = new TicketTypeRequest(TicketTypeRequest.Type.ADULT, 2);
+        TicketTypeRequest[] ticketTypeRequests = {adultTicketType};
+        
+        ticketService.purchaseTickets(0L, ticketTypeRequests);
+    }
 
 }

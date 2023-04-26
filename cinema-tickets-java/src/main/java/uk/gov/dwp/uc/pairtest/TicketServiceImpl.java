@@ -32,6 +32,10 @@ public class TicketServiceImpl implements TicketService {
 		var hasChildOrInfantTicket = false;
 		var totalPrice = 0;
 		var numSeats = 0;
+		
+		if (!(accountId > 0)) {
+			throw new InvalidPurchaseException("Invalid AccountId. An AccountId should be grater than zero");
+		}
 
 		if (ticketTypeRequests == null || ticketTypeRequests.length == 0) {
 			throw new InvalidPurchaseException("At least one ticket type request is required");
